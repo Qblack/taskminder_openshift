@@ -10,10 +10,14 @@ sys.path.append(os.path.join('wsgi', 'openshift'))
 # Below for testing only
 #
 if __name__ == '__main__':
-    ip   = 'localhost'
-    port = 8051
-    zapp = imp.load_source('application', 'wsgi/application')
+    if 'OPENSHIFT_REPO_DIR' in os.environ:
+        ip   = 'localhost'
+        port = 8051
+        app = imp.load_source('application', 'wsgi/application')
 
-    from wsgiref.simple_server import make_server
-    httpd = make_server(ip, port, zapp.application)
-    httpd.serve_forever()
+        from wsgiref.simple_server import make_server
+        httpd = make_server(ip, port, app.application)
+        httpd.serve_forever()
+else:
+    from django.core.wsgi import get_wsgi_application
+    application = get_wsgi_application()

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import imp
+import urllib.parse
 
 ON_OPENSHIFT = False
 if 'OPENSHIFT_REPO_DIR' in os.environ:
@@ -95,7 +96,17 @@ TEMPLATE_DIRS = (
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-if ON_OPENSHIFT:
+if 'OPENSHIFT_POSTGRESQL_DB_URL' in os.environ:
+    url = urllib.parse.urlparse(os.environ.get('OPENSHIFT_POSTGRESQL_DB_URL'))
+    DATABASES  = {
+        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ['OPENSHIFT_APP_NAME'],
+        'USER': url.username,
+        'PASSWORD': url.password,
+        'HOST': url.hostname,
+        'PORT': url.port,
+        }
+elif ON_OPENSHIFT:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

@@ -101,8 +101,8 @@ if 'OPENSHIFT_POSTGRESQL_DB_URL' in os.environ:
     DATABASES  = {
         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ['OPENSHIFT_APP_NAME'],
-        'USER': url.username,
-        'PASSWORD': url.password,
+        'USER': 'adminxekfvsf',
+        'PASSWORD': 'g7ImjpATN2XL',
         'HOST': url.hostname,
         'PORT': url.port,
         }

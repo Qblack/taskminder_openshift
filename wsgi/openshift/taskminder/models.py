@@ -5,6 +5,7 @@ class Assignment(models.Model):
     title = models.CharField(max_length=200)
     due_date = models.DateTimeField('due date')
     course = models.OneToOneField(Course)
+    completed = models.BooleanField()
 
     def __unicode__(self):
         return self.title
@@ -14,6 +15,7 @@ class Reading(models.Model):
     due_date = models.DateTimeField('due date')
     course = models.OneToOneField(Course)
     pages = models.CharField(max_length=20)
+    completed = models.BooleanField()
 
     def __unicode__(self):
         return self.title
@@ -22,6 +24,7 @@ class Test(models.Model):
     title = models.CharField(max_length=200)
     due_date = models.DateTimeField('due date')
     course = models.OneToOneField(Course)
+    completed = models.BooleanField()
 
     def __unicode__(self):
         return self.title

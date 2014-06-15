@@ -98,14 +98,15 @@ TEMPLATE_DIRS = (
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 if 'OPENSHIFT_POSTGRESQL_DB_URL' in os.environ:
     url = urllib.parse.urlparse(os.environ.get('OPENSHIFT_POSTGRESQL_DB_URL'))
-    DATABASES  = {
+    DATABASES  = { 'default':{
         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ['OPENSHIFT_APP_NAME'],
-        'USER': 'adminxekfvsf',
-        'PASSWORD': 'g7ImjpATN2XL',
+        'USER': url.username,
+        'PASSWORD': url.password,
         'HOST': url.hostname,
         'PORT': url.port,
         }
+    }
 elif ON_OPENSHIFT:
     DATABASES = {
         'default': {

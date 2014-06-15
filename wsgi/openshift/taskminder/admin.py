@@ -10,3 +10,5 @@ admin.site.register(Course)
 admin.site.register(Professor)
 admin.site.register(University)
 admin.site.register(Province)
+admin.site.register(Country)
+

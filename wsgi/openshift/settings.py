@@ -54,7 +54,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'south',
-    'tasks',
+    'taskminder',
 )
 
 MIDDLEWARE_CLASSES = (

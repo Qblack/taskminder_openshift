@@ -1,5 +1,5 @@
 from django.contrib import admin
-from tasks.models import Assignment, Reading, Test, Course, Professor, University, Country, Province
+from taskminder.models import Assignment, Reading, Test, Course, Professor, University, Country, Province
 
 # Register your models here.
 

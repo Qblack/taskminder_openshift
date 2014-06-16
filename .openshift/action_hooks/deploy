@@ -7,6 +7,7 @@
 source $OPENSHIFT_HOMEDIR/python/virtenv/venv/bin/activate
 
 
+#This initializes the database if it is not there
 if [ ! -f $OPENSHIFT_DATA_DIR/db.sqlite3 ]
 then
     echo "Copying $OPENSHIFT_REPO_DIR/wsgi/openshift/db.sqlite3 to $OPENSHIFT_DATA_DIR"
@@ -15,8 +16,8 @@ then
     python "$OPENSHIFT_REPO_DIR"wsgi/openshift/manage.py migrate taskminder --noinput
 
 else
-    echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/openshift/manage.py syncdb --noinput'"
-    python "$OPENSHIFT_REPO_DIR"wsgi/openshift/manage.py syncdb --noinput
+    echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/openshift/manage.py migrate taskminder --noinput'"
+    python "$OPENSHIFT_REPO_DIR"wsgi/openshift/manage.py migrate taskminder --noinput
 fi
 
 

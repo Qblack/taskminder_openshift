@@ -6,4 +6,3 @@
 
 # Activate VirtualEnv in order to use the correct libraries
 
-python "$OPENSHIFT_REPO_DIR"wsgi/openshift/manage.py syncdb --noinput"

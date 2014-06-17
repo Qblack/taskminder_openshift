@@ -1,9 +1,42 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends "home/base.html" %}
 
-</body>
-</html>
+{% block title %}Assignments{% endblock %}
+
+{% block content %}
+
+    {% if assignments %}
+    <div class="row" >
+        <div class="col-md-12">
+             <table class="table" id="homework">
+                 <thead>
+                  <tr>
+                      <th>Course Code</th>
+                      <th>Title</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Complete</th>
+                  </tr>
+                  </thead>
+                <tbody>
+                    {% for assignment in assignments %}
+                       <tr>
+                        <td>{{ assignment.course.course_code }}</td>
+                        <td>{{ assignment.title }}</td>
+                        <td>{{ assignment.due_date }}</td>
+                        {% if assignment.time == None %}
+                           <td>in class</td>
+                        {% else %}
+                            <td>{{ assignment.time }}</td>
+                        {% endif %}
+                        <td>{{ assignment.complete }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+             </table>
+        </div>
+    </div>
+    {% else %}
+             No Assignments to display.
+    {% endif %}
+
+{% endblock %}

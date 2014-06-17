@@ -1,15 +1,15 @@
 __author__ = 'Q'
 
 import sqlite3
-from taskminder.models import Assignment, Reading, Test, Course
+from taskminder.models import Task, Course
 from django.utils.dateparse import parse_date, parse_time
 
 TYPES = ['Readings', 'Assignments', 'Tests','Courses']
 def transfer_database():
     db = sqlite3.connect("C:/Users/Q/Envs/Python33/SchedualeMaker/summer2014courses.db")
 
-    copy_deliverable(db,TYPES[1],Assignment)
-    copy_deliverable(db,TYPES[2],Test)
+    copy_deliverable(db,TYPES[1],Task)
+    copy_deliverable(db,TYPES[2],Task)
     copy_reading(db)
     db.close()
     return
@@ -39,7 +39,7 @@ def copy_reading(db):
     for reading in entries:
         course = Course.objects.get(course_code=reading[0])
         date = parse_date(reading[3])
-        new_reading = Reading(title=reading[1],
+        new_reading = Task(title=reading[1],
                                     due_date=date,
                                     pages = reading[4],
                                     completed=False,

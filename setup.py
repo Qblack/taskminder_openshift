@@ -8,7 +8,7 @@ import os
 packages = ['Django<=1.6',
             'static3',  # If you want serve the static files in the same server
             'south',
-            'django-bootsrap3',
+            'django-bootstrap3',
             # 'mysql-connector-python',
             # 'pymongo',
             # 'psycopg2',

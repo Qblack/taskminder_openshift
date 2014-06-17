@@ -14,5 +14,6 @@ urlpatterns = patterns('',
     
     url(r'^admin/', include(admin.site.urls)),
     url(r'^load/','views.load'),
+    url(r'^login/','taskminder.views.login'),
     url(r'^assignments/', 'taskminder.views.show_assignments'),
 )

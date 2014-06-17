@@ -1,5 +1,5 @@
 {% extends "home/base.html" %}
-
+{% load bootstrap3 %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
@@ -11,8 +11,9 @@
         {# Display django.contrib.messages as Bootstrap alerts #}
         {% bootstrap_messages %}
 
+
         {# Display a form #}
-        <form action="/url/to/submit/" method="post" class="form">
+        <form action="/login/" method="post" class="form">
             {% csrf_token %}
             {% bootstrap_form form %}
             {% buttons %}
@@ -20,6 +21,7 @@
                     {% bootstrap_icon "star" %} Submit
                 </button>
             {% endbuttons %}
+
         </form>
 
 

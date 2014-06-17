@@ -1,0 +1,32 @@
+{% extends "home/base.html" %}
+{% load bootstrap3 %}
+{% block title %}Registration{% endblock %}
+
+{% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-offset-2">
+
+                    <h2>Welcome to Taskminder a web application to keep track of your life</h2>
+                    <h3>You will be able to select your courses and professors once you have registered</h3>
+
+                {# Display django.contrib.messages as Bootstrap alerts #}
+                {% bootstrap_messages %}
+
+
+                {# Display a form #}
+                <form action="/register/" method="post" class="form">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                    {% endbuttons %}
+                </form>
+
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

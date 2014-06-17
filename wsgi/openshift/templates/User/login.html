@@ -4,21 +4,25 @@
 
 {% block content %}
 
-
-        {# Display django.contrib.messages as Bootstrap alerts #}
-        {% bootstrap_messages %}
-
-
-        {# Display a form #}
-        <form action="/login/" method="post" class="form">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            {% buttons %}
-                <button type="submit" class="btn btn-primary">
-                    Submit
-                </button>
-            {% endbuttons %}
-        </form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-offset-4">
+            {# Display django.contrib.messages as Bootstrap alerts #}
+            {% bootstrap_messages %}
+            {# Display a form #}
+            <form action="/login/" method="post" class="form">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">
+                        Submit
+                    </button>
+                {% endbuttons %}
+            </form>
+            <a href="/register">Sign Up</a>
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}

@@ -18,4 +18,5 @@ urlpatterns = patterns('',
     url(r'^register/','taskminder.views.register'),
     url(r'^thanks/','taskminder.views.thanks'),
     url(r'^assignments/', 'taskminder.views.show_assignments'),
+    url(r'^course_add/', 'taskminder.views.course_add_view'),
 )

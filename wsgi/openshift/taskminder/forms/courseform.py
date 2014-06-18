@@ -23,9 +23,6 @@ class AddCourseForm(forms.ModelForm):
 
 
 
-
-
-
 class JoinCourseForm(forms.Form):
     country = forms.ModelChoiceField(queryset=Country.objects.order_by('name'))
     province =selectable.AutoCompleteSelectField(

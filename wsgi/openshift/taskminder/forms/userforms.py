@@ -3,12 +3,28 @@ from django import forms
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from taskminder.models import UserProfile
+from django.contrib.auth import authenticate
 
 
 
 class LogInForm(forms.Form):
-    username = forms.CharField(max_length=200)
-    password = forms.CharField(max_length=200,widget=forms.PasswordInput)
+    username = forms.CharField(max_length=200,required=True)
+    password = forms.CharField(max_length=200,widget=forms.PasswordInput,required=True)
+
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        password= self.cleaned_data.get('password')
+        user = authenticate(username=username,password=password)
+        if not user or not user.is_active:
+            raise forms.ValidationError("Invalid login, please try again")
+        return self.cleaned_data
+
+    def login(self,request):
+        username = self.cleaned_data.get('username')
+        password= self.cleaned_data.get('password')
+        user = authenticate(username=username,password=password)
+        return user
+
 
 
 class UserCreationForm(forms.ModelForm):

@@ -2,20 +2,22 @@ from django.shortcuts import render
 from taskminder.models import Task
 from taskminder.forms.userforms import LogInForm, UserCreationForm
 from django.http import HttpResponseRedirect
-from django.contrib.auth import get_user_model
-
+from django.contrib.auth import login
 
 # Create your views here.
 
 
-def login(request):
+def login_view(request):
     if request.method == 'POST':
-        form = LogInForm(request.POST)
-        if form.is_valid():
-            return HttpResponseRedirect('/home/')
+        login_form = LogInForm(request.POST)
+        if login_form.is_valid():
+            user = login_form.login(request)
+            if user:
+                login(request,user)
+                return HttpResponseRedirect("/thanks/")
     else:
-        form = LogInForm()
-    return render(request,'User/login.html',{'form':form,})
+        login_form = LogInForm()
+    return render(request,'User/login.html',{'form':login_form,})
 
 def register(request):
     if request.method == 'POST':

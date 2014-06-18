@@ -19,4 +19,6 @@ urlpatterns = patterns('',
     url(r'^thanks/','taskminder.views.thanks'),
     url(r'^assignments/', 'taskminder.views.show_assignments'),
     url(r'^course_add/', 'taskminder.views.course_add_view'),
+    url(r'^course_join/', 'taskminder.views.course_join_view'),
+    (r'^selectable/', include('selectable.urls')),
 )

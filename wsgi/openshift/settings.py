@@ -56,7 +56,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'taskminder',
-    'bootstrap3'
+    'bootstrap3',
+    'selectable',
+
 )
 
 MIDDLEWARE_CLASSES = (

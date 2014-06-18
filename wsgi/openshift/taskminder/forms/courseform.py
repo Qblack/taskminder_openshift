@@ -1,6 +1,9 @@
 __author__ = 'Q'
 from django import forms
-from taskminder.models import Course
+from taskminder.models import Course, Country, Province, University
+import selectable.forms as selectable
+from taskminder.lookup import ProvinceLookup
+
 
 class AddCourseForm(forms.ModelForm):
     class Meta:
@@ -19,5 +22,16 @@ class AddCourseForm(forms.ModelForm):
         return course
 
 
-#class JoinCourseForm(forms.Form):
 
+
+
+
+class JoinCourseForm(forms.Form):
+    country = forms.ModelChoiceField(queryset=Country.objects.order_by('name'))
+    province =selectable.AutoCompleteSelectField(
+        lookup_class=ProvinceLookup,
+        label='Province/State',
+        required=True,
+        widget=selectable.AutoComboboxSelectWidget    )
+
+    university = forms.ModelChoiceField(queryset=University.objects.order_by('name'))

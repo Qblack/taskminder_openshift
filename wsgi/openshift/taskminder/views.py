@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from taskminder.models import Task
 from taskminder.forms.userforms import LogInForm, UserCreationForm
-from taskminder.forms.courseform import AddCourseForm
+from taskminder.forms.courseform import AddCourseForm, JoinCourseForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login
 
@@ -49,3 +49,15 @@ def course_add_view(request):
     else:
         form = AddCourseForm()
     return render(request,'Course/add_course.html',{'form':form,})
+
+
+def course_join_view(request):
+
+    if request.method == 'POST':
+        form = JoinCourseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/thanks/')
+    else:
+        form = JoinCourseForm()
+    return render(request,'Course/join_course.html',{'form':form,})

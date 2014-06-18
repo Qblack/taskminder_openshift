@@ -1,8 +1,12 @@
 {% extends "home/base.html" %}
 {% load bootstrap3 %}
-{% block title %}Login{% endblock %}
+
+
+{% block title %}Join a Course{% endblock %}
 
 {% block content %}
+    {{ form.media.css }}
+    {{ form.media.js }}
 
     <div class="container">
         <div class="row">
@@ -10,7 +14,7 @@
                 {# Display django.contrib.messages as Bootstrap alerts #}
                 {% bootstrap_messages %}
                 {# Display a form #}
-                <form action="/course_add/" method="post" class="form">
+                <form action="/course_join/" method="post" class="form">
                     {% csrf_token %}
                     {% bootstrap_form form %}
                     {% buttons %}
@@ -22,6 +26,16 @@
             </div>
         </div>
     </div>
+
+<script type="text/javascript">
+    $('#id_country').change(function(){
+           function newParameters(query) {
+                query.country = $(this).val();
+           }
+        $('#id_province_0').djselectable('option', 'prepareQuery', newParameters);
+    });
+
+</script>
 
 
 {% endblock %}

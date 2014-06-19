@@ -22,19 +22,11 @@ BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-default_keys = { 'SECRET_KEY': 'tjy&7h%c=q01+c5i@_-t)&n2c+y*tn7v_)vbdksnlv@s5qh%e_' }
-use_keys = default_keys
-if ON_OPENSHIFT:
-    imp.find_module('openshiftlibs')
-    import openshiftlibs
-    use_keys = openshiftlibs.openshift_secure(default_keys)
 
-SECRET_KEY = use_keys['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ON_OPENSHIFT:
-    DEBUG = True
+    DEBUG = False
 else:
     DEBUG = True
 
@@ -134,3 +126,8 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'taskminder.UserProfile'
 LOGIN_URL = '/login/'
+
+try:
+  from local_settings import *
+except ImportError:
+  pass

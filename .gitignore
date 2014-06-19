@@ -12,4 +12,4 @@ venv/
 virtenv/
 dist/
 build/
-openshift/local_settings.py
+wsgi/openshift/local_settings.py

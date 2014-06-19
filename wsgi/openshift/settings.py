@@ -49,8 +49,6 @@ INSTALLED_APPS = (
     'south',
     'taskminder',
     'bootstrap3',
-    'selectable',
-
 )
 
 MIDDLEWARE_CLASSES = (

@@ -1,7 +1,6 @@
 __author__ = 'Q'
 from django import forms
 from taskminder.models import Course, Country, Province, University
-import selectable.forms as selectable
 from taskminder.lookups import ProvinceLookup
 
 

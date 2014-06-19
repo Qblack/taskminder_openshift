@@ -21,6 +21,4 @@ urlpatterns = patterns('',
     url(r'^mytasks/', 'taskminder.views.show_my_tasks_view'),
     url(r'^course_add/', 'taskminder.views.course_add_view'),
     url(r'^course_join/', 'taskminder.views.course_join_view'),
-
-    (r'^selectable/', include('selectable.urls')),
 )

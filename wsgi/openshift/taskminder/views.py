@@ -76,3 +76,6 @@ def show_assignments(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/thanks/')
+
+
+

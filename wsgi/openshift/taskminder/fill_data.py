@@ -10,8 +10,8 @@ TYPES = ['Reading', 'Assignment', 'Test','Course']
 def transfer_database():
     db = sqlite3.connect("C:/Users/Q/Envs/Python33/SchedualeMaker/summer2014courses.db")
 
-    #copy_deliverable(db,TYPES[1],Task)
-    #copy_deliverable(db,TYPES[2],Task)
+    copy_deliverable(db,TYPES[1],Task)
+    copy_deliverable(db,TYPES[2],Task)
     copy_reading(db)
     db.close()
     return

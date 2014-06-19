@@ -18,9 +18,9 @@ urlpatterns = patterns('',
     url(r'^logout/','taskminder.views.logout_view'),
     url(r'^register/','taskminder.views.register'),
     url(r'^thanks/','taskminder.views.thanks'),
-    url(r'^assignments/', 'taskminder.views.show_assignments'),
+    url(r'^mytasks/', 'taskminder.views.show_my_tasks_view'),
     url(r'^course_add/', 'taskminder.views.course_add_view'),
     url(r'^course_join/', 'taskminder.views.course_join_view'),
-    
+
     (r'^selectable/', include('selectable.urls')),
 )

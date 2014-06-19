@@ -1,0 +1,46 @@
+{% extends "home/base.html" %}
+
+{% block title %}Assignments{% endblock %}
+
+{% block content %}
+
+    {% if tasks %}
+    <div class="row" >
+        <div class="col-md-12">
+             <table class="table" id="homework">
+                 <thead>
+                  <tr>
+                      <th>Type</th>
+                      <th>Course Code</th>
+                      <th>Title</th>
+                      <th>Pages</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Complete</th>
+                  </tr>
+                  </thead>
+                <tbody>
+                    {% for task in tasks %}
+                       <tr>
+                        <td>{{ task.type }}</td>
+                        <td>{{ task.course.course_code }}</td>
+                        <td>{{ task.title }}</td>
+                        <td>{{ task.pages }}</td>
+                        <td>{{ task.due_date }}</td>
+                        {% if task.time == None %}
+                           <td>in class</td>
+                        {% else %}
+                            <td>{{ task.time }}</td>
+                        {% endif %}
+                        <td>Not complete</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+             </table>
+        </div>
+    </div>
+    {% else %}
+             No Tasks to display.
+    {% endif %}
+
+{% endblock %}

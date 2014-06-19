@@ -71,6 +71,20 @@ def show_assignments(request):
 
     return  render(request,'home/assignments.html',context)
 
+@login_required
+def show_my_tasks_view(request):
+    print("Hello World")
+    user = get_user_model().objects.get(id=request.session['user_id'])
+
+    tasks=[]
+    for course in user.courses.all():
+        course_tasks = Task.objects.filter(course=course.id)
+        for task in course_tasks:
+            tasks.append(task)
+
+    context = {'tasks':tasks}
+
+    return  render(request,'Tasks/show_tasks.html',context)
 
 
 def logout_view(request):

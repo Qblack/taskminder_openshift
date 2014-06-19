@@ -1,8 +1,6 @@
 __author__ = 'Q'
 from django import forms
 from taskminder.models import Course, Country, Province, University
-from taskminder.lookups import ProvinceLookup
-
 
 class AddCourseForm(forms.ModelForm):
     class Meta:
@@ -24,9 +22,6 @@ class AddCourseForm(forms.ModelForm):
 
 class JoinCourseForm(forms.Form):
     courses = forms.ModelMultipleChoiceField(queryset=Course.objects.all())
-
-
-
 
 class SelectUniversityForm(forms.Form):
     university = forms.ModelChoiceField(queryset=University.objects.order_by('name'))

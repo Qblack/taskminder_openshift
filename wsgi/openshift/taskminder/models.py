@@ -35,6 +35,16 @@ class Professor(models.Model):
     def __str__(self):
         return self.name
 
+class Course(models.Model):
+    course_name = models.CharField(max_length=200)
+    course_code = models.CharField(max_length=10)
+    course_section = models.CharField(max_length=10)
+    professor = models.ManyToManyField(Professor)
+
+    def __str__(self):
+        return self.course_name+'-'+self.course_section
+
+
 class TaskminderUserManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, date_of_birth, password=None):
         """
@@ -84,6 +94,7 @@ class UserProfile(AbstractBaseUser):
     last_name = models.CharField(max_length=100)
     program = models.CharField(max_length=200)
     universities = models.ManyToManyField(University)
+    courses = models.ManyToManyField(Course)
 
     email = models.EmailField(
         verbose_name='email address',
@@ -126,15 +137,6 @@ class UserProfile(AbstractBaseUser):
         return self.is_admin
 
 
-class Course(models.Model):
-    course_name = models.CharField(max_length=200)
-    course_code = models.CharField(max_length=10)
-    course_section = models.CharField(max_length=10)
-    professor = models.ManyToManyField(Professor)
-    students = models.ManyToManyField(settings.AUTH_USER_MODEL)
-
-    def __str__(self):
-        return self.course_name+'-'+self.course_section
 
 
 class Task(models.Model):

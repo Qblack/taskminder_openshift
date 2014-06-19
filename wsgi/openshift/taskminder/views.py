@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from taskminder.models import Task
 from taskminder.forms.userforms import LogInForm, UserCreationForm
-from taskminder.forms.courseform import AddCourseForm, JoinCourseForm
+from taskminder.forms.courseform import AddCourseForm, JoinCourseForm, SelectUniversityForm
 from django.http import HttpResponseRedirect
-from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, logout, get_user_model
 
 # Create your views here.
 
@@ -15,6 +16,7 @@ def login_view(request):
             user = login_form.login(request)
             if user:
                 login(request,user)
+                request.session['user_id'] = user.id
                 return HttpResponseRedirect("/thanks/")
     else:
         login_form = LogInForm()
@@ -33,11 +35,6 @@ def register(request):
 def thanks(request):
     return render(request,'home/thanks.html')
 
-def show_assignments(request):
-    assignments = Task.objects.get(type='Assignment').all()
-    context = {'assignments':assignments}
-
-    return  render(request,'home/assignments.html',context)
 
 def course_add_view(request):
 
@@ -51,13 +48,31 @@ def course_add_view(request):
     return render(request,'Course/add_course.html',{'form':form,})
 
 
+@login_required
 def course_join_view(request):
 
     if request.method == 'POST':
         form = JoinCourseForm(request.POST)
         if form.is_valid():
-            form.save()
+            for course in form.cleaned_data.get('courses'):
+                user_id = request.session['user_id']
+                user = get_user_model().objects.get(id=user_id)
+                user.courses.add(course)
+
             return HttpResponseRedirect('/thanks/')
     else:
         form = JoinCourseForm()
     return render(request,'Course/join_course.html',{'form':form,})
+
+@login_required
+def show_assignments(request):
+    assignments = Task.objects.get(type='Assignment').all()
+    context = {'assignments':assignments}
+
+    return  render(request,'home/assignments.html',context)
+
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/thanks/')
